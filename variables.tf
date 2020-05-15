@@ -1,5 +1,3 @@
-variable "tgw_name" {}
-
 variable "tags" {
   default = {}
 }
