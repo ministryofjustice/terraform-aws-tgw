@@ -31,5 +31,3 @@ resource "aws_ec2_transit_gateway_route_table" "this" {
 
   tags = merge(var.tags, { Name = each.key })
 }
-
-
