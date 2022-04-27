@@ -23,7 +23,7 @@ resource "aws_ec2_transit_gateway" "this" {
   tags = merge(var.tags, { Name = each.key })
 
   provider = aws.ireland
-
+}
 
 # CREATE TGW ROUTE TABLES
 resource "aws_ec2_transit_gateway_route_table" "this" {
