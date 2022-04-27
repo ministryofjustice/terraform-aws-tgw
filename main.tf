@@ -4,6 +4,7 @@ locals {
     for tgw_name, tgw in var.tgws : [
       for rtb in tgw.route_tables : [
         merge({ rtb_name : rtb }, { tgw_name : tgw_name })
+
       ]
     ]
   ])
@@ -21,6 +22,8 @@ resource "aws_ec2_transit_gateway" "this" {
   auto_accept_shared_attachments  = lookup(each.value, "auto_accept_shared_attachments", "disable")
 
   tags = merge(var.tags, { Name = each.key })
+
+  provider = lookup(each.value, "provider", "aws")
 }
 
 
@@ -30,4 +33,6 @@ resource "aws_ec2_transit_gateway_route_table" "this" {
   transit_gateway_id = aws_ec2_transit_gateway.this[each.value].id
 
   tags = merge(var.tags, { Name = each.key })
+
+  provider = lookup(each.value, "provider", "aws")
 }
