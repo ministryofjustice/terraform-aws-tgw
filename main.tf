@@ -4,7 +4,6 @@ locals {
     for tgw_name, tgw in var.tgws : [
       for rtb in tgw.route_tables : [
         merge({ rtb_name : rtb }, { tgw_name : tgw_name })
-
       ]
     ]
   ])
@@ -23,7 +22,7 @@ resource "aws_ec2_transit_gateway" "this" {
 
   tags = merge(var.tags, { Name = each.key })
 
-  provider = lookup(each.value, "provider", "")
+  provider = lookup(each.value, "provider", aws)
 }
 
 
@@ -34,5 +33,5 @@ resource "aws_ec2_transit_gateway_route_table" "this" {
 
   tags = merge(var.tags, { Name = each.key })
 
-  provider = lookup(each.value, "provider", "")
+  provider = lookup(each.value, "provider", aws)
 }
