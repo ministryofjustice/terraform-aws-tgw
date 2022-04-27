@@ -23,7 +23,7 @@ resource "aws_ec2_transit_gateway" "this" {
 
   tags = merge(var.tags, { Name = each.key })
 
-  provider = lookup(each.value, "provider", "aws")
+  provider = lookup(each.value, "provider", "aws.london")
 }
 
 
@@ -34,5 +34,5 @@ resource "aws_ec2_transit_gateway_route_table" "this" {
 
   tags = merge(var.tags, { Name = each.key })
 
-  provider = lookup(each.value, "provider", "aws")
+  provider = lookup(each.value, "provider", "aws.london")
 }
