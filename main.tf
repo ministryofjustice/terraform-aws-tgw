@@ -19,7 +19,7 @@ resource "aws_ec2_transit_gateway" "this" {
   default_route_table_propagation = lookup(each.value, "default_route_table_propagation", "disable")
   dns_support                     = lookup(each.value, "dns_support", "enable")
   auto_accept_shared_attachments  = lookup(each.value, "auto_accept_shared_attachments", "disable")
-
+  transit_gateway_cidr_blocks     = lookup(each.value, "transit_gateway_cidr_blocks", null)
   tags = merge(var.tags, { Name = each.key })
 }
 
